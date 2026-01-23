@@ -6,6 +6,7 @@ import Documents from "./pages/Documents";
 import Medical from "./pages/Medical";
 import Emergency from "./pages/Emergency";
 import Members from "./pages/Members";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -13,11 +14,32 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/documents" element={<Documents />} />
-        <Route path="/medical" element={<Medical />} />
-        <Route path="/emergency" element={<Emergency />} />
-        <Route path="/members" element={<Members />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/documents"
+          element={
+            <ProtectedRoute>
+              <Documents />
+            </ProtectedRoute>
+          }
+        />
+        <Route 
+          path="/medical" 
+          element={
+            <ProtectedRoute>
+              <Medical />
+            </ProtectedRoute>
+          } 
+        />
+        <Route path="/emergency" element={<ProtectedRoute><Emergency /></ProtectedRoute>} />
+        <Route path="/members" element={<ProtectedRoute><Members /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
